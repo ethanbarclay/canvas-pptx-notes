@@ -1,0 +1,3 @@
+python-pptx
+canvasapi
+browser_cookie3
