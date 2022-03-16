@@ -5,12 +5,13 @@ import browser_cookie3
 import pptx_notes
 import requests
 
-API_URL = 'API URL'
-API_KEY = 'API KEY'
+API_URL = 'API_URL'
+API_KEY = 'API_KEY'
 COURSE_ID = 0
 
 canvas = Canvas('https://' + API_URL, API_KEY)
-modules = canvas.get_course(COURSE_ID).get_modules()
+course = canvas.get_course(COURSE_ID)
+modules = course.get_modules()
 
 print('downloading...')
 
@@ -31,5 +32,5 @@ for module in modules:
             download_url = requests.get(download_url,
                              cookies=cj, headers=headers_dict).history[1].url
             # download and read notes from presentation
-            pptx_notes.process_presentation(BytesIO(requests.get(download_url).content))
+            pptx_notes.process_presentation(BytesIO(requests.get(download_url).content), course.name)
 print('finished!')
